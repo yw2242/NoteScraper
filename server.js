@@ -46,12 +46,14 @@ app.get("/scrape", function(req, res) {
 
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this).find('h2.feed-card--title').text();
-      result.link = $(this).find(".feed-card--image").children("a").attr("href");
+      result.link = $(this).find(".collection-list--image").attr("srcset");
+      console.log("tmp")
         console.log(result);
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
         .then(function(dbArticle) {
           // View the added result in the console
+          console.log("in db")
           console.log(dbArticle);
         })
         .catch(function(err) {
